@@ -1,0 +1,13 @@
+{
+  "version": "team-config-0.7.6",
+  "source": "https://github.com/antonio-clicktoclose/antonio-claude-skills.git",
+  "commit": "9168b08e67a42024e497dc708254adcc4d1f7e7a",
+  "sha256": {
+    "install.py": "04a1df58e3b5e5bce7df671d7ce7d520763909f681c9bed9832ff0320071c2e0",
+    "execution-context.py": "4e0e5871f25abf29cbf56ffd471a342acccbdc22225562463e33bc9e095297fa",
+    "policy.md": "bc5ec9ec15436ac0d7de40291735e84e77dc4643b2ad73bf9a501292b6c77868",
+    "karpathy-guidelines.md": "d968085ff5682200642cf76b9267f445d82973efc96fbc745e683980d6d02735",
+    "c2c-light-reader.toml": "b0a9ebe8877d5487a04396140ce5cfeabb96a1615defd475e675b22dc86214d6",
+    "c2c-light-reader.md": "91423e97ceaf48205616f047e75d27a481f69721b1309b0759fb33bd49bf2521"
+  }
+}
