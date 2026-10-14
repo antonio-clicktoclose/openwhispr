@@ -1,4 +1,6 @@
-# Check your Claude and Codex setup
+# Required Claude and Codex setup
+
+**Antonio requires this setup for everyone using Claude Code or Codex in this repo. Complete it before your next coding task.**
 
 Run this from the repo root before agent work:
 
