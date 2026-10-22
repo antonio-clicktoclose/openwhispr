@@ -1,3 +1,11 @@
+<!-- BEGIN:shared-slack-communication -->
+## Shared Slack communication guide
+
+Before drafting or editing Slack messages, read the shared guide: https://obsidian.clicktoclose.ai/C2C/Processes/Slack-Communication-Guidelines. Use the Obsidian API when available. Canonical GitHub copy: https://github.com/antonio-clicktoclose/c2c-monorepo/blob/main/docs/slack-communication-guidelines.md. On Antonio's Mac, the local copy is `/Users/antoniomonteiro/Developer/Coding Projects/C2C System Monorepo/docs/slack-communication-guidelines.md`.
+
+Apply its tone, owner requests, estimate labels and review checks to the active client. Preserve the user's wording and each project's specific channels, reviewers, Slack formatting tools and send permissions. Do not copy another client's people or facts. For PG, also read `slackmessage.md`. Reading this guide or preparing a draft does not authorize sending.
+<!-- END:shared-slack-communication -->
+
 <!-- BEGIN:c2c-agent-setup-check -->
 ## Required agent setup check
 
