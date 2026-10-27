@@ -27,7 +27,7 @@ path from any repository:
 python3 <installed-skill>/scripts/business_advisor.py teaching "business problem"
 ```
 
-The default route uses a local embedding model and a local relevance model.
+The default route uses a local embedding model.
 On first use it installs the pinned Python runtime and downloads public model
 files into that user's cache. Chat text stays local. There is no paid embedding
 API. Python 3.10 or later and network access are needed for initial setup.
@@ -54,6 +54,7 @@ it does not prove that every future model response will comply.
 Shared operating record:
 https://obsidian.clicktoclose.ai/?note=C2C%2FProcesses%2FBusiness-Advisor-Training-Sources-And-Maintenance
 <!-- END:advisor-semantic-routing -->
+
 
 
 
