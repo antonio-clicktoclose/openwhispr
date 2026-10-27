@@ -5,7 +5,7 @@ Paste this into the app you use, from any local folder:
 ```text
 Set up the shared business advisor for THIS app only. If you are Claude Code, use --app claude. If you are Codex, use --app codex. Do not install, sign into, trust or test the other app. Do not change repo permissions, credentials, models, unrelated hooks or native trust.
 
-Use my own existing GitHub and Obsidian access. Fetch https://github.com/antonio-clicktoclose/antonio-claude-skills.git into a new temporary folder. Check out reviewed commit 7164e4771f9053d786b7a5356d296e0433f6c596 and verify HEAD exactly before running code. Leave my current folder unchanged.
+Use my own existing GitHub and Obsidian access. Fetch https://github.com/antonio-clicktoclose/antonio-claude-skills.git into a new temporary folder. Check out reviewed commit fba00431006b814b64e994c86f27b9945c8a7d47 and verify HEAD exactly before running code. Leave my current folder unchanged.
 
 Use python.org Python 3.13 at /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 on macOS, or Python 3.10 or later on Linux. Run plugins/team-config/runtime/advisor/setup.py --app APP from the temporary checkout, replacing APP with this app. Ask me to complete any required login or native hook review in this app. Never approve trust yourself.
 
