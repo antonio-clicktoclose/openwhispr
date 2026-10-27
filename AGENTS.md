@@ -1,3 +1,32 @@
+<!-- BEGIN:business-advisor-entry -->
+## Required business advisor routing
+
+For business advice, use the installed `team-config:antonio-business-advisor`
+skill automatically before answering. Read `ADVISOR.md` in this repo. Do not
+ask the user whether to query the advisor or wait for a creator name or keyword.
+Use the current message and recent chat context. Short follow-ups keep the
+business context until the task clearly changes.
+
+Read current evidence for this project first. Then run the installed advisor
+reader's `teaching` command with a plain-language description of the business
+problem. It uses local semantic search over reviewed public teaching notes.
+Read the returned passage and its exact source timestamp. Inspect the linked
+frame before making a visual claim. Use only sources that change the answer.
+If semantic search fails, use the labelled lexical fallback and state the gap.
+Never claim a source was checked when retrieval or access failed.
+
+This applies to offers, ads, funnels, sales, retention, delivery, hiring,
+operations, growth and business decisions. Skip unrelated coding, security,
+legal, tax, health, trading and personal tasks. Keep client records isolated.
+Keep Antonio's voice and current evidence ahead of outside teaching. Do not
+imitate a creator, invent certainty or force a source into every answer.
+Loading advice does not authorize spending, sending or other external actions.
+
+If the skill or its runtime is missing, follow `ADVISOR.md` to install or update
+`team-config` through the existing plugin manager. Report access gaps. Never
+copy another user's credentials or edit an installed plugin cache by hand.
+<!-- END:business-advisor-entry -->
+
 <!-- BEGIN:shared-slack-communication -->
 ## Shared Slack communication guide
 
