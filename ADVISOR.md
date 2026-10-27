@@ -56,3 +56,4 @@ https://obsidian.clicktoclose.ai/?note=C2C%2FProcesses%2FBusiness-Advisor-Traini
 <!-- END:advisor-semantic-routing -->
 
 
+
