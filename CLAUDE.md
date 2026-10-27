@@ -1,6 +1,17 @@
 <!-- BEGIN:business-advisor-entry -->
 ## Required business advisor routing
 
+At the start of each chat, keep `team-config` current without asking the user
+or requiring a manual pull. Claude uses the repo marketplace setting
+`extraKnownMarketplaces.antonio-claude-skills.autoUpdate: true`.
+In Codex, run `scripts/update_team_config.py` from this repo before advice.
+On macOS use `/Library/Frameworks/Python.framework/Versions/3.13/bin/python3`;
+on other systems use Python 3.10 or later. The helper uses the normal Codex
+plugin manager, a per-user lock and a one-hour success cache. Report failed
+updates. Resolve the current installed skill path again after updating.
+A running chat may need to reload before new plugin hooks take effect.
+Never claim that an update succeeded from a setting alone.
+
 For business advice, use the installed `team-config:antonio-business-advisor`
 skill automatically before answering. Read `ADVISOR.md` in this repo. Do not
 ask the user whether to query the advisor or wait for a creator name or keyword.

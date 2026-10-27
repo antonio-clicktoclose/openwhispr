@@ -7,16 +7,26 @@ contains the complete reader, training skills and source routes. Every user
 needs their own GitHub access and their existing authorized Obsidian connection.
 Never share personal credentials or copy Antonio's service-account token.
 
-Claude Code installation:
+Claude refreshes this marketplace and its installed plugins after startup.
+The repo sets `autoUpdate: true`; users do not need to pull the skills repo.
+Existing chats may need a reload to load new hooks. Initial installation,
+workspace trust and private-repo access remain one-time requirements.
+
+Claude Code initial installation:
 
 ```bash
 claude plugin marketplace add antonio-clicktoclose/antonio-claude-skills
 claude plugin install team-config@antonio-claude-skills -s user
-claude plugin update team-config@antonio-claude-skills -s user
 ```
 
-For Codex, use its plugin manager to add the same marketplace and install or
-update `team-config`. Use the installed skill path returned by that manager.
+For Codex, use its plugin manager once to add the same marketplace and install
+`team-config`. At each chat start, the repo rules require the agent to run
+`scripts/update_team_config.py` before advice. The helper refreshes the catalog
+and installs the current release through `codex plugin`, once per hour per user.
+It does not create a cron, change credentials or edit plugin caches. This is an
+agent startup rule, not a native Codex background update service. A session that
+ignores repo instructions can skip it. Use the installed skill path returned by
+the manager after the refresh.
 Do not assume another person's home path exists. Both tools must trust and
 load the package through their normal approval flow.
 
@@ -54,6 +64,7 @@ it does not prove that every future model response will comply.
 Shared operating record:
 https://obsidian.clicktoclose.ai/?note=C2C%2FProcesses%2FBusiness-Advisor-Training-Sources-And-Maintenance
 <!-- END:advisor-semantic-routing -->
+
 
 
 

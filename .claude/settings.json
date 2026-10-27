@@ -1,5 +1,14 @@
 {
   "enabledPlugins": {
     "team-config@antonio-claude-skills": true
+  },
+  "extraKnownMarketplaces": {
+    "antonio-claude-skills": {
+      "source": {
+        "source": "github",
+        "repo": "antonio-clicktoclose/antonio-claude-skills"
+      },
+      "autoUpdate": true
+    }
   }
 }
