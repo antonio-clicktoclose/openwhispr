@@ -6,6 +6,14 @@ Run this once from a current team repo checkout:
 python3 scripts/setup_business_advisor.py
 ```
 
+If your checkout does not have that script yet, run this from any local folder. It uses your own GitHub CLI login and fetches a pinned launcher:
+
+```bash
+setup_file="$(mktemp)" && \
+gh api 'repos/antonio-clicktoclose/antonio-claude-skills/contents/scripts/setup_business_advisor.py?ref=0ed58b68207264c5039a3a79d3766995edd1fe63' --jq '.content | @base64d' > "$setup_file" && \
+python3 "$setup_file"
+```
+
 The command fetches a pinned, reviewed setup from the private skills repo. It installs user hooks for both Claude Code and Codex, turns on plugin updates and runs checks. The user hooks cover repos and local folders, including folders without Git. For business questions, the advisor uses the chat context and searches reviewed training without a keyword or manual skill request.
 
 ## Before setup
