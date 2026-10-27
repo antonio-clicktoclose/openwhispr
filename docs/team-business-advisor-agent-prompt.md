@@ -1,19 +1,31 @@
-# Prompt for a teammate's Claude Code or Codex agent
+# Setup prompt for Claude Code or Codex, from any local folder
 
-Copy the block below into the agent chat while working in a team repo:
+Paste this into either agent. No repo clone or plugin install is needed first. The person still needs their own approved access. This setup supports macOS and Linux.
 
 ```text
-Before working on my request, check this machine's required team setup.
+Set up this machine's shared business advisor for both Claude Code and Codex. Work from my current folder. Do not assume I have cloned a team repo or installed the plugin. Until setup passes, do setup work only.
 
-Run `python3 scripts/check_business_advisor_setup.py`. Continue only if it exits 0 and reports `ordinary_work_allowed: true`.
+Use my own GitHub access and approved Obsidian connection. Keep repo permissions, credentials, model settings, unrelated hooks and trust choices unchanged. Never copy another person's token or bypass native trust.
 
-If the checker is missing or fails, pause my original request and do setup work only. Read `docs/team-setup-business-advisor-and-obsidian-hooks.md`, then run `python3 scripts/setup_business_advisor.py` as needed. If these files are missing, fetch the reviewed setup files from this repo without overwriting unrelated work.
+1. Check the prerequisites: Git, both app CLIs and normal app sign-ins. On macOS, use the signed python.org interpreter at /Library/Frameworks/Python.framework/Versions/3.13/bin/python3. Linux needs Python 3.10 or later. Help install missing tools through official sources. Ask me to complete any required login or OS approval. Stop and report unsupported platforms or missing access.
 
-Use my own existing GitHub and approved Obsidian access. Keep repo permissions, credentials, model settings and unrelated hooks unchanged. Do not copy anyone else's token or bypass native hook trust. Ask me to complete any required app login or Codex /hooks review.
+2. Fetch this private repo into a new temporary directory outside my current folder:
+   https://github.com/antonio-clicktoclose/antonio-claude-skills.git
 
-Finish the fresh-session and training-reference checks in both Claude Code and Codex. Confirm automatic advisor loading in a repo and a local non-Git folder. Test a normal business question without naming an advisor or creator. Check the returned timestamps and linked frame files against the live reviewed notes. Keep raw logs private.
+   Fetch and check out this exact reviewed commit:
+   c956fe9b9b9d3525aadae132ec849164c7d60164
 
-Rerun the machine check. Report the result, installed versions and any exact blocker. Resume my original request only after the check passes. Do not call setup complete from an enabled setting, a package install or a copied receipt alone.
+   Verify that HEAD matches the full commit before running its code. Stop if any fetch or verification fails. Leave my current folder's files untouched.
+
+3. From that temporary checkout, run plugins/team-config/runtime/advisor/setup.py with the required Python interpreter. Use an absolute script path. Run setup without --verify first, so login and trust can be completed before model tests.
+
+4. Ask me to review any required native Codex /hooks trust or workspace trust. Never approve it yourself. Then run ~/.local/share/c2c-team-config-updates/verify.py with the required interpreter, using the temporary Git checkout as the working directory. These tests use my normal account credits and selected models.
+
+5. Verify both apps load the advisor automatically in a repo and a non-Git folder. Confirm that an ordinary business question triggers semantic search without naming the advisor. Check the cited timestamps and linked frame files against the live reviewed notes. Keep raw logs private.
+
+6. Return to my original folder. Run ~/.local/share/c2c-team-config-updates/check_business_advisor_setup.py with the required interpreter. Resume normal work only when it exits 0 and reports "ordinary_work_allowed": true.
+
+Report installed versions, test results and any exact blocker. Do not claim success from an enabled setting or a package install alone. Keep the temporary checkout until checks pass, then remove only the temporary files you created. Leave user hooks and global instructions installed so this works across repos and local folders with automatic updates.
 ```
 
-The gate guides agent behavior. It cannot stop someone from disabling instructions or hooks. Each machine needs its own setup and checks.
+This is an agent instruction gate, not an OS security lock. Missing private-repo access remains a blocker.
