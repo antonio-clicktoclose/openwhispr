@@ -7,7 +7,7 @@ import sys
 import tempfile
 
 REPO='https://github.com/antonio-clicktoclose/antonio-claude-skills.git'
-COMMIT='8231471e81e27c6454d4125ade5aa5ed962205db'
+COMMIT='c956fe9b9b9d3525aadae132ec849164c7d60164'
 MAC_PYTHON='/Library/Frameworks/Python.framework/Versions/3.13/bin/python3'
 
 
