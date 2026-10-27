@@ -1,27 +1,21 @@
 <!-- BEGIN:team-advisor-setup -->
-## Required machine setup gate
+## Business advisor setup for the app in use
 
-Before ordinary work in every chat, run:
-`python3 scripts/check_business_advisor_setup.py`
-Continue only when it exits 0 and reports `ordinary_work_allowed: true`.
-If the checker is missing or fails, enter setup-only mode. Pause the original
-request. Do only the reads, installs, login steps, native hook review and tests
-needed to repair setup. Do not do unrelated coding, business work or external
-actions until the check passes. Do not skip the gate or invent a passed result.
+Claude Code and Codex work independently. Never require a Claude user to install,
+sign into, trust or test Codex. Never require a Codex user to set up Claude.
+Use `--app claude` in Claude and `--app codex` in Codex for the setup,
+checker and verifier. `--app both` is optional and requires an explicit request.
 
-Read `docs/team-setup-business-advisor-and-obsidian-hooks.md`. Run
-`python3 scripts/setup_business_advisor.py` when setup is missing. If these
-setup files are absent, fetch the reviewed setup files from this repo without
-overwriting unrelated changes. Use each person's own existing GitHub and
-Obsidian access. Keep repo permissions, credentials, models and unrelated hooks.
-A person must complete any required login or Codex `/hooks` trust review.
-Report the exact blocker and keep the original request waiting while it is open.
-Rerun the gate after repair before resuming. The copy-ready agent prompt is
-`docs/team-business-advisor-agent-prompt.md`.
+Check only the current app with `python3 scripts/check_business_advisor_setup.py
+--app APP` (replace APP with claude or codex). A missing advisor must not be
+reported as lost access to Twilio, dialers, transcripts, Metabase or campaigns.
+Check each provider through that person's own approved access. Do not alter
+credentials, repo permissions, models or native trust to fix advisor setup.
 
-The setup covers Claude Code and Codex in repos and local folders, with automatic
-updates. For business questions, query the advisor from the chat context without
-asking the user. This gate is an agent instruction, not an OS security boundary.
+Read `docs/team-setup-business-advisor-and-obsidian-hooks.md` for setup.
+Use the advisor automatically for business questions once the current app is ready.
+If advisor setup is incomplete, report that limit. Unrelated provider diagnosis
+and recovery can continue; the other app is never a prerequisite.
 <!-- END:team-advisor-setup -->
 
 <!-- BEGIN:business-advisor-entry -->

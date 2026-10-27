@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Read-only machine setup gate. Exit 0 allows work; exit 1 allows setup only."""
+import argparse
 import hashlib
 import json
 import os
@@ -17,16 +18,28 @@ def read(path):
     return json.loads(path.read_text())
 
 
-def check(home):
+def selected_apps(app=None):
+    if app == 'both':return ('claude','codex')
+    if app in ('claude','codex'):return (app,)
+    if os.environ.get('CLAUDECODE'):return ('claude',)
+    if os.environ.get('CODEX_THREAD_ID') or os.environ.get('CODEX_HOME'):return ('codex',)
+    import shutil
+    return ('claude',) if shutil.which('claude') else ('codex',)
+
+
+def check(home, app=None):
     errors=[]
     base=home/'.local/share/c2c-team-config-updates'
     def require(condition,message):
         if not condition:errors.append(message)
     try:
-        receipt=read(base/'acceptance.json')
+        apps=selected_apps(app)
+        receipt_path=base/('acceptance-'+apps[0]+'.json') if len(apps)==1 and (base/('acceptance-'+apps[0]+'.json')).exists() else base/'acceptance.json'
+        receipt=read(receipt_path)
         require(receipt.get('status')=='verified','Local acceptance tests have not passed.')
-        require((base/'acceptance.json').stat().st_uid==os.getuid(),'Acceptance receipt belongs to another OS user.')
-        for app,helper in [('claude','claude_business_advisor_hook.py'),('codex','update_team_config.py')]:
+        require(receipt_path.stat().st_uid==os.getuid(),'Acceptance receipt belongs to another OS user.')
+        for app in apps:
+            helper='claude_business_advisor_hook.py' if app=='claude' else 'update_team_config.py'
             require((base/helper).is_file(),app+' updater is missing.')
             settings=read(home/('.'+app)/('settings.json' if app=='claude' else 'hooks.json'))
             require(not settings.get('disableAllHooks'),app+' hooks are disabled.')
@@ -63,11 +76,14 @@ def check(home):
             'scope':'Instruction gate based on local evidence. It does not prevent a person from disabling instructions or hooks.'}
 
 
-def native_problems(cwd):
+def native_problems(cwd, app=None):
     problems=[]
     try:
-        auth=subprocess.run(['claude','auth','status'],capture_output=True,text=True,timeout=20)
-        if auth.returncode or not json.loads(auth.stdout).get('loggedIn'):problems.append('Claude Code needs its normal account login.')
+        apps=selected_apps(app)
+        if 'claude' in apps:
+            auth=subprocess.run(['claude','auth','status'],capture_output=True,text=True,timeout=20)
+            if auth.returncode or not json.loads(auth.stdout).get('loggedIn'):problems.append('Claude Code needs its normal account login.')
+        if 'codex' not in apps:return problems
         auth=subprocess.run(['codex','login','status'],capture_output=True,text=True,timeout=20)
         if auth.returncode:problems.append('Codex needs its normal account login.')
         process=subprocess.Popen(['codex','app-server','--stdio'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.DEVNULL,text=True)
@@ -105,9 +121,10 @@ if __name__=='__main__':
         signed=Path('/Library/Frameworks/Python.framework/Versions/3.13/bin/python3')
         if not signed.is_file():
             print('SETUP ONLY: Install python.org Python 3.13 first.');raise SystemExit(1)
-        if Path(sys.executable).resolve()!=signed.resolve():os.execv(str(signed),[str(signed),str(Path(__file__).resolve())])
-    result=check(Path.home())
+        if Path(sys.executable).resolve()!=signed.resolve():os.execv(str(signed),[str(signed),str(Path(__file__).resolve()),*sys.argv[1:]])
+    parser=argparse.ArgumentParser();parser.add_argument('--app',choices=['claude','codex','both']);args=parser.parse_args()
+    result=check(Path.home(),args.app)
     if result['ordinary_work_allowed']:
-        result['problems'].extend(native_problems(Path.cwd()))
+        result['problems'].extend(native_problems(Path.cwd(),args.app))
         if result['problems']:result.update(status='setup-only',ordinary_work_allowed=False,next_action='Repair login or native hook trust, then rerun this check. Do only setup work until it passes.')
     print(json.dumps(result,indent=2));raise SystemExit(0 if result['ordinary_work_allowed'] else 1)

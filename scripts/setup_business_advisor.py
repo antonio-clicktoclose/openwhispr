@@ -7,7 +7,7 @@ import sys
 import tempfile
 
 REPO='https://github.com/antonio-clicktoclose/antonio-claude-skills.git'
-COMMIT='c956fe9b9b9d3525aadae132ec849164c7d60164'
+COMMIT='7164e4771f9053d786b7a5356d296e0433f6c596'
 MAC_PYTHON='/Library/Frameworks/Python.framework/Versions/3.13/bin/python3'
 
 
@@ -28,7 +28,7 @@ def main():
                 raise RuntimeError('Cannot fetch the reviewed private setup. Check your existing GitHub access. No repo permissions were changed.')
         actual=subprocess.check_output(['git','-C',folder,'rev-parse','HEAD'],text=True).strip()
         if actual!=COMMIT:raise RuntimeError('Setup commit did not match the reviewed pin.')
-        return subprocess.call([python,str(Path(folder)/'plugins/team-config/runtime/advisor/setup.py'),'--verify'])
+        return subprocess.call([python,str(Path(folder)/'plugins/team-config/runtime/advisor/setup.py'),'--verify',*sys.argv[1:]])
 
 
 if __name__=='__main__':
