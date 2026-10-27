@@ -20,13 +20,16 @@ claude plugin install team-config@antonio-claude-skills -s user
 ```
 
 For Codex, use its plugin manager once to add the same marketplace and install
-`team-config`. At each chat start, the repo rules require the agent to run
-`scripts/update_team_config.py` before advice. The helper refreshes the catalog
-and installs the current release through `codex plugin`, once per hour per user.
-It does not create a cron, change credentials or edit plugin caches. This is an
-agent startup rule, not a native Codex background update service. A session that
-ignores repo instructions can skip it. Use the installed skill path returned by
-the manager after the refresh.
+`team-config`. The repo includes native SessionStart and UserPromptSubmit hooks.
+They run `scripts/update_team_config.py --hook`, refresh through `codex plugin`
+and check the installed package. SessionStart loads the full installed advisor
+skill into context. UserPromptSubmit adds a short routing reminder. Successful
+update checks are reused for one hour. Hook receipts store status, version and
+skill hash, without prompts or credentials. Review and trust the new hooks in
+Codex once. Disabled or untrusted hooks cannot run. This removes the agent's
+need to remember the update command. It does not guarantee that every model
+answer follows the loaded advice. The helper does not create a cron, change
+credentials or edit plugin caches. Use the current installed skill path.
 Do not assume another person's home path exists. Both tools must trust and
 load the package through their normal approval flow.
 
@@ -64,6 +67,7 @@ it does not prove that every future model response will comply.
 Shared operating record:
 https://obsidian.clicktoclose.ai/?note=C2C%2FProcesses%2FBusiness-Advisor-Training-Sources-And-Maintenance
 <!-- END:advisor-semantic-routing -->
+
 
 
 

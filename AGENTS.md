@@ -4,12 +4,15 @@
 At the start of each chat, keep `team-config` current without asking the user
 or requiring a manual pull. Claude uses the repo marketplace setting
 `extraKnownMarketplaces.antonio-claude-skills.autoUpdate: true`.
-In Codex, run `scripts/update_team_config.py` from this repo before advice.
-On macOS use `/Library/Frameworks/Python.framework/Versions/3.13/bin/python3`;
-on other systems use Python 3.10 or later. The helper uses the normal Codex
-plugin manager, a per-user lock and a one-hour success cache. Report failed
-updates. Resolve the current installed skill path again after updating.
-A running chat may need to reload before new plugin hooks take effect.
+Codex runs `scripts/update_team_config.py --hook` through the repo's
+`.codex/hooks.json` at SessionStart and UserPromptSubmit. The startup hook
+loads the installed advisor instructions; the prompt hook keeps routing active.
+The updater uses a per-user lock and a one-hour success cache. It checks the
+installed package and reports failures. Do not run a second manual check when
+the hook already succeeded. Native hook trust is still required once on each
+machine. Keep unrelated hooks and trust choices. On macOS the hook uses
+`/Library/Frameworks/Python.framework/Versions/3.13/bin/python3`; on Linux it
+uses Python 3.10 or later. Existing chats may need a reload for new hooks.
 Never claim that an update succeeded from a setting alone.
 
 For business advice, use the installed `team-config:antonio-business-advisor`

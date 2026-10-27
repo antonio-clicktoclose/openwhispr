@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$(uname -s)\" = Darwin ]; then /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 \"$(git rev-parse --show-toplevel)/scripts/update_team_config.py\" --hook; else python3 \"$(git rev-parse --show-toplevel)/scripts/update_team_config.py\" --hook; fi",
+            "timeout": 110,
+            "statusMessage": "Updating team-config and loading business advisor",
+            "additionalContextLimit": 16000
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ \"$(uname -s)\" = Darwin ]; then /Library/Frameworks/Python.framework/Versions/3.13/bin/python3 \"$(git rev-parse --show-toplevel)/scripts/update_team_config.py\" --hook; else python3 \"$(git rev-parse --show-toplevel)/scripts/update_team_config.py\" --hook; fi",
+            "timeout": 110,
+            "statusMessage": "Updating team-config and loading business advisor",
+            "additionalContextLimit": 16000
+          }
+        ]
+      }
+    ]
+  }
+}
