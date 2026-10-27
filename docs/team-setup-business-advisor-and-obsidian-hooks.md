@@ -10,7 +10,7 @@ If your checkout does not have that script yet, run this from any local folder. 
 
 ```bash
 setup_file="$(mktemp)" && \
-gh api 'repos/antonio-clicktoclose/antonio-claude-skills/contents/scripts/setup_business_advisor.py?ref=0ed58b68207264c5039a3a79d3766995edd1fe63' --jq '.content | @base64d' > "$setup_file" && \
+gh api 'repos/antonio-clicktoclose/antonio-claude-skills/contents/scripts/setup_business_advisor.py?ref=2812c21624fce9f67aa4a4573d293891fbed6811' --jq '.content | @base64d' > "$setup_file" && \
 python3 "$setup_file"
 ```
 
